@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+
+  var $ = function(id) {
+    return document.getElementById(id)
+  }
+
+  var newArr = [];
+
+  // 筛选数组
+  for(var i = 0, len = aqiData.length; i < len; i++ ) {
+    if(aqiData[i][1] > 60) {
+      newArr.push(aqiData[i])
+    }
+  }
+
+  function display() {
+    for(var i = 0, len = newArr.length; i < len; i++) {
+      createEle(i, newArr[i][0], newArr[i][1])
+    }
+  }
+
+  // 创建元素
+  function createEle(index, text1, text2) {
+    var index = index + 1;
+    var chineseIndex = toChinese(index);
+    var oLi = document.createElement('li');
+    var text = document.createTextNode('第' + chineseIndex + '名: ' + text1 + '(样例), ' + text2)
+    oLi.appendChild(text)
+
+    $('aqi-list').appendChild(oLi)
+  }
+
+  //　阿拉伯数字转换中文
+  function toChinese(num) {
+    var N = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+    function coverToChinese(num){
+      var str = num.toString();
+      var len = num.toString().length;
+      var cNum = [];
+      for(var i = 0; i < len; i++) {
+        cNum.push(N[str.charAt(i)])
+      }
+      return cNum.join('')
+    }
+    return coverToChinese(num)
+  }
+
+  display()
+
+})();
+
+</script>
+</body>
+</html>
