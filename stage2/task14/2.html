@@ -1,11 +1,3 @@
-## 任务十四：零基础JavaScript编码（二）
-
-### 任务描述
-
-- 参考以下示例代码，页面加载后，将提供的空气质量数据数组，按照某种逻辑（比如空气质量大于60）进行过滤筛选，最后将符合条件的数据按照一定的格式要求显示在网页上
-
-
-```
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,12 +8,14 @@
 
   <h3>污染城市列表</h3>
   <ul id="aqi-list">
-<!--   
+<!--
     <li>第一名：福州（样例），10</li>
   	<li>第二名：福州（样例），10</li> -->
   </ul>
 
 <script type="text/javascript">
+// 学习别人的写法
+// https://github.com/JumiRay/task/blob/master/task014.html
 
 var aqiData = [
   ["北京", 90],
@@ -40,15 +34,28 @@ var aqiData = [
   将空气质量指数大于60的城市显示到aqi-list的列表中
   */
 
+  var oList = document.getElementById('aqi-list')
+  var arr = ['一', '二', '三', '四', '五']
+
+  // 排序
+  aqiData.sort(function(a, b){
+    return b[1] - a[1]
+  })
+
+  // 清空元素内容
+  oList.innerHTML = ''
+
+  for(var i = 0, len = aqiData.length; i < len; i++) {
+    if(aqiData[i][1] > 60) {
+      var oLi = document.createElement('li')
+      oLi.innerHTML = '第' + arr[i] + '名: ' + aqiData[i][0] + ',' + aqiData[i][1]
+      oList.appendChild(oLi)
+    }
+  }
+
+
 })();
 
 </script>
 </body>
 </html>
-```
-
-1.html 问题:
-
-- 没有对数据排序
-- 自己写的可能有点啰嗦....
-- 数据量很少, 阿拉伯转中文的方法可以使用更简单的

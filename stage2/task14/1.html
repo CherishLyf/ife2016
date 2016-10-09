@@ -38,6 +38,11 @@ var aqiData = [
 
   var newArr = [];
 
+  // sort 排序
+  aqiData.sort(function(a, b){
+    return b[1] - a[1]
+  })
+
   // 筛选数组
   for(var i = 0, len = aqiData.length; i < len; i++ ) {
     if(aqiData[i][1] > 60) {
