@@ -29,7 +29,7 @@ function addAqiData() {
     // alert('成功验证')
     airNum = parseInt(airNum);
     aqiData[cityName] = airNum
-    // aqiData['"' + cityName + '"'] = airNum
+
   } else if (!validateFun.stringCheck(cityName)) {
     alert('城市名称应为中文或英文')
   } else if (!validateFun.numCheck(airNum)) {
@@ -55,14 +55,18 @@ var validateFun = {
  */
 function renderAqiList() {
   var aqiTable = document.getElementById('aqi-table')
+  aqiTable.innerHTML = ''
 
   for(var city in aqiData) {
 
     // 防止进入 原型属性
     if(aqiData.hasOwnProperty(city)) {
+      if (aqiTable.children.length === 0) {
+        aqiTable.innerHTML = "<tr> <td>城市</td> <td>空气质量</td> <td>操作</td> </tr>";
+      }
 
       var oTr = document.createElement('tr')
-      oTr.innerHTML = '<td>' + city + '</td>' + '<td>' + aqiData[city] + '</td>' + '<button>删除</button>'
+      oTr.innerHTML = '<td>' + city + '</td>' + '<td>' + aqiData[city] + '</td><td>' + '<button class="del-btn">删除</button></td>'
       aqiTable.appendChild(oTr)
     }
   }
@@ -81,9 +85,13 @@ function addBtnHandle() {
  * 点击各个删除按钮的时候的处理逻辑
  * 获取哪个城市数据被删，删除数据，更新表格显示
  */
-function delBtnHandle() {
-  // do sth.
+function delBtnHandle(target) {
+  //　学习了别人的写法　https://github.com/soulclearm/Learn_front_end/blob/dev/public/second/script/task16.js
 
+  var tr = target.parentElement.parentElement
+  var strCity = tr.children[0].innerHTML
+  console.log(strCity)
+  delete aqiData[strCity]
   renderAqiList();
 }
 
@@ -91,12 +99,19 @@ function init() {
 
   // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
   var addBtn = document.getElementById('add-btn')
-  addBtn.onclick = function() {
+  addBtn.addEventListener('click', function() {
     addBtnHandle()
-  }
+  })
 
   // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
+  var table = document.getElementById('aqi-table')
+  var delBtn = table.getElementsByClassName("del-btn")
 
+  table.addEventListener('click', function(e){
+    if(e.target && e.target.nodeName === 'BUTTON') {
+      delBtnHandle(e.target)
+    }
+  })
 }
 
 init();
