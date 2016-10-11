@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .top {
+      width: 500px;
+      height: 25px;
+      margin: 20px auto;
+    }
+    .top .input-container {
+      height: 25px;
+      line-height: 30px;
+      float: left;
+      border-radius: 3px;
+      outline: none;
+      border: 1px solid #ddd;
+      padding: 0 10px;
+    }
+    .top .btn-container {
+      float: right;
+    }
+    .top .btn-container button{
+      padding: 0 10px;
+      height: 25px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      background-color: transparent;
+      color: #000;
+      cursor: pointer;
+    }
+    .num-container {
+      width: 500px;
+      height: 50px;
+      padding: 10px 0 0 10px;
+      margin: 0 auto;
+    }
+    .num-container span {
+      display: block;
+      width: 50px;
+      height: 50px;
+      float: left;
+      background: #CC0000;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      line-height: 50px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      font-family: '微软雅黑';
+    }
+  </style>
+</head>
+<body>
+  <div class='top'>
+    <input type="text" placeholder="请输入数字" class="input-container" id='inputContainer'>
+    <div class="btn-container" id="btnContainer">
+      <button>左侧入</button>
+      <button>右侧入</button>
+      <button>左侧出</button>
+      <button>右侧出</button>
+    </div>
+  </div>
+  <div class="num-container" id='numContainer'>
+    <!-- <span>10</span> -->
+  </div>
+  <script src=./1.js></script>
+</body>
+</html>
